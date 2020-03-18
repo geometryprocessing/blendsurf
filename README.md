@@ -1,10 +1,13 @@
 Blendsurf is a C++ library to represent surfaces of arbitrary smoothness (C^\infty and C^k) written by Lexing Ying and Elif Tosun. Minor additions added by Matt Morse. Currently NOT  maintained. It is made available for use as is in other projects.
 
 Requires:
-    * OpenMP
-    * BLAS/LAPACK
-    * CMake 3.1
-The renderer requires OpenGL 2 or less.
+* OpenMP
+* BLAS/LAPACK
+* CMake 3.1
+    
+The renderer requires:
+* OpenGL version that supports `EXT_texture_cube_map`
+    
 Library compilation tested on OSX 10.10 and Cent OS 7.3 with gcc-4.8 and icc/icpc 17.0.1. The renderer has been tested with gcc-4.8 on OSX 10.10.
 
 To compile the library:
