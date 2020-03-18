@@ -9,13 +9,13 @@ FUNCTION(PREPEND var )
    ENDFOREACH(f)
    SET(${var} "${listVar}" PARENT_SCOPE)
 ENDFUNCTION(PREPEND)
-
-
+message(STATUS "WHAT IS HAPPENING")
+message(STATUS  "cmake module path " ${CMAKE_MODULE_PATH})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/lib")
 
 find_package(OpenMP REQUIRED)
-find_package(lapack REQUIRED)
+find_package(LAPACK REQUIRED)
 
 # include source code and headers
 add_subdirectory(src)
@@ -27,36 +27,12 @@ add_library(Blendsurf::blendsurf ALIAS blendsurf)
 set_property(TARGET blendsurf PROPERTY EXPORT_NAME Blendsurf::blendsurf)
 
 
-target_include_directories(blendsurf PUBLIC ${Blendsurf_SOURCE_DIR}/include ${LAPACK_LIBRARIES})
-target_link_libraries(blendsurf lapack)
-target_link_libraries(blendsurf blas)
+target_include_directories(blendsurf PUBLIC ${Blendsurf_SOURCE_DIR}/include )
+target_link_libraries(blendsurf ${LAPACK_LIBRARIES})
 target_link_libraries(blendsurf stdc++)
 
 # compile the renderer
 if (COMPILE_RENDERER)
-
     add_subdirectory(vis)
 endif()
 
-
-#install(TARGETS blendsurf 
-#    EXPORT blendsurf-exports
-#  LIBRARY DESTINATION lib
-#  ARCHIVE DESTINATION lib
-#  RUNTIME DESTINATION bin
-#  INCLUDES DESTINATION bin/include
-#)
-#
-#install(
-#    EXPORT blendsurf-exports
-#  NAMESPACE Blendsurf::
-#  FILE BlendsurfConfig.cmake
-#  DESTINATION lib/cmake/blendsurf
-#)
-#
-#export(
-#    EXPORT blendsurf 
-#    FILE "${CMAKE_CURRENT_BINARY_DIR}/BlendsurfConfig.cmake"
-#)
-#
-#export(PACKAGE Blendsurf)

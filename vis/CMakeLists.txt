@@ -19,14 +19,14 @@ set(Blendsurf_Visualizer_SRC ${Blendsurf_Visualizer_SRC}  PARENT_SCOPE)
 # find packages  for rendering
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
-find_package(png REQUIRED)
 
 # set up an intermediate library to link
 add_library(blendsurf_render STATIC ${Blendsurf_Visualizer_SRC})
 add_library(Blendsurf::render ALIAS blendsurf_render)
-set_property(TARGET blendsurf_render PROPERTY EXPORT_NAME
-    Blendsurf::render)
+set_property(TARGET blendsurf_render PROPERTY EXPORT_NAME Blendsurf::render)
+
 target_link_libraries(blendsurf_render OpenGL::GL)
+target_link_libraries(blendsurf_render OpenGL::GLU)
 target_link_libraries(blendsurf_render GLUT::GLUT)
 target_link_libraries(blendsurf_render Blendsurf::blendsurf)
 
